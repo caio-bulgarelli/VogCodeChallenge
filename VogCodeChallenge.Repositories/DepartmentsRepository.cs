@@ -15,7 +15,7 @@ namespace VogCodeChallenge.Repositories
 
         public IEnumerable<Department> GetAll()
         {
-            return _vogContext.Departmets;
+            return _vogContext.Departments;
         }
     }
 }
