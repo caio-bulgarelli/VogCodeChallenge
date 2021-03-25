@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using VogCodeChallenge.Contracts.Dtos.Employees;
 using VogCodeChallenge.Contracts.Interfaces.Services;
+using VogCodeChallenge.Entities;
 
 namespace VogCodeChallenge.API.Controllers
 {
@@ -27,7 +29,7 @@ namespace VogCodeChallenge.API.Controllers
         {
             try
             {
-                var employees = _employeesService.GetAll();
+                IEnumerable<Employee> employees = _employeesService.GetAll();
 
                 if (!employees.Any())
                 {
@@ -51,8 +53,8 @@ namespace VogCodeChallenge.API.Controllers
         {
             try
             {
-                var department = _departmentsService.Get(departmentId);
-                var employees = _employeesService.GetAll(departmentId);
+                Department department = _departmentsService.Get(departmentId);
+                IEnumerable<Employee> employees = _employeesService.GetAll(departmentId);
 
                 if (department == null)
                 {
