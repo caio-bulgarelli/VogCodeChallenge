@@ -6,6 +6,9 @@ using VogCodeChallenge.Entities;
 
 namespace VogCodeChallenge.Services
 {
+    /// <summary>
+    /// General Employees Service that manages employees.
+    /// </summary>
     public class EmployeesService : IEmployeesService
     {
         private IGenericRepository<Employee> _repository;

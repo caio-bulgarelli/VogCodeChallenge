@@ -6,6 +6,9 @@ using VogCodeChallenge.Entities;
 
 namespace VogCodeChallenge.Services
 {
+    /// <summary>
+    /// General Departments Service that manages departments.
+    /// </summary>
     public class DepartmentsService : IDepartmentsService
     {
         private IGenericRepository<Department> _repository;

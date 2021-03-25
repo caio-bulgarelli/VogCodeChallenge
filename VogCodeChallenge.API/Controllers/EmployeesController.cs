@@ -9,6 +9,11 @@ using VogCodeChallenge.Entities;
 
 namespace VogCodeChallenge.API.Controllers
 {
+    /// <summary>
+    /// Controller tha manages employees.
+    /// Controller methods should translate internal entities to DTO Contracts.
+    /// Methods should obey REST protocol.
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class EmployeesController : ControllerBase
@@ -24,6 +29,10 @@ namespace VogCodeChallenge.API.Controllers
             _departmentsService = departmentsService;
         }
 
+        /// <summary>
+        /// General get method that return all employees.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -31,6 +40,7 @@ namespace VogCodeChallenge.API.Controllers
             {
                 IEnumerable<Employee> employees = _employeesService.GetAll();
 
+                // If no employees are found, returns 404.
                 if (!employees.Any())
                 {
                     return NotFound();
@@ -48,6 +58,11 @@ namespace VogCodeChallenge.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Get method that returns all employees of a single department.
+        /// </summary>
+        /// <param name="departmentId"></param>
+        /// <returns></returns>
         [HttpGet("department/{departmentId}")]
         public IActionResult Get(int departmentId)
         {
@@ -56,11 +71,13 @@ namespace VogCodeChallenge.API.Controllers
                 Department department = _departmentsService.Get(departmentId);
                 IEnumerable<Employee> employees = _employeesService.GetAll(departmentId);
 
+                // If the department does not exist, returns 404.
                 if (department == null)
                 {
                     return NotFound("Department not found.");
                 }
 
+                // If no employees are found for the required department, returns 404.
                 if (!employees.Any())
                 {
                     return NotFound($"No employees available for the specified department: {department.Name}");
